@@ -2,6 +2,8 @@
 
 Reasonably normalization for navigator.getUserMedia. Inspired by [Mike Taylr's **gUM Shield**](https://gist.github.com/f2ac64ed7fc467ccdfe3)
 
+Compressed size: 480 bytes gzipped (778 bytes minified).
+
 ## Getting Started
 Download the [production version][min] or the [development version][max].
 
