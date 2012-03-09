@@ -38,7 +38,8 @@ config.init({
       browser: true
     },
     globals: {
-      jQuery: true
+      jQuery: true,
+      console: true
     }
   },
   uglify: {}
