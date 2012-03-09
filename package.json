@@ -1,7 +1,7 @@
 {
   "name": "navigator.getusermedia",
   "title": "Navigator Getusermedia",
-  "description": "Reasonable normalization for navigator.getUserMedia. Inspired by Mike Taylr's gUM Shield https://gist.github.com/f2ac64ed7fc467ccdfe3",
+  "description": "Reasonably normalization for navigator.getUserMedia. Inspired by Mike Taylr's gUM Shield https://gist.github.com/f2ac64ed7fc467ccdfe3",
   "version": "0.1.0",
   "homepage": "https://github.com/rwldrn/navigator.getusermedia",
   "author": {
