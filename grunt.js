@@ -2,29 +2,27 @@
 config.init({
   pkg: '<json:package.json>',
   meta: {
-    banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
+    banner: '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
       '<%= template.today("m/d/yyyy") %>\n' +
       '<%= pkg.homepage ? "* " + pkg.homepage + "\n" : "" %>' +
       '* Copyright (c) <%= template.today("yyyy") %> <%= pkg.author.name %>;' +
       ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */'
   },
   concat: {
-    'dist/dmv.js': ['<banner>', '<file_strip_banner:lib/dmv.js>', '<file_strip_banner:lib/gum.js>'],
-    'public/javascripts/dmv.js': ['<banner>', '<file_strip_banner:lib/dmv.js>', '<file_strip_banner:lib/gum.js>']
+    'dist/navigator.getusermedia.js': ['<banner>', '<file_strip_banner:src/navigator.getusermedia.js>']
   },
   min: {
-    'dist/dmv.min.js': ['<banner>', 'dist/dmv.js'],
-    'public/javascripts/dmv.min.js': ['<banner>', 'public/javascripts/dmv.js']
+    'dist/navigator.getusermedia.min.js': ['<banner>', 'dist/navigator.getusermedia.js']
   },
-  test: {
-    files: ['test/**/*.js']
+  qunit: {
+    files: ['test/**/*.html']
   },
   lint: {
-    files: ['grunt.js', 'lib/**/*.js', 'test/**/*.js']
+    files: ['grunt.js', 'src/**/*.js', 'test/**/*.js']
   },
   watch: {
     files: '<config:lint.files>',
-    tasks: 'lint test'
+    tasks: 'lint qunit'
   },
   jshint: {
     options: {
@@ -36,24 +34,15 @@ config.init({
       noarg: true,
       sub: true,
       undef: true,
-      boss: true,
       eqnull: true,
       browser: true
     },
     globals: {
-      window: true,
-      navigator: true,
-      requestAnimationFrame: true,
-      jQuery: true,
-      io: true,
-      global: true,
-      exports: true,
-      module: true,
-      console: true
+      jQuery: true
     }
   },
   uglify: {}
 });
 
 // Default task.
-task.registerTask('default', 'lint test concat min');
+task.registerTask('default', 'lint qunit concat min');

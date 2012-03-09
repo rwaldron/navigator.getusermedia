@@ -1,8 +1,0 @@
-{
-  "name": "example-app",
-  "subdomain": "example-app",
-  "scripts": {
-    "start": "server.js"
-  },
-  "version": "0.0.0-1"
-}

@@ -1,38 +1,27 @@
 {
-  "name": "dmv",
-  "description": "Node.js powered, WebRTC Delivered video chat",
-  "version": "0.2.0",
-  "homepage": "https://github.com/rwldrn/dmv",
+  "name": "navigator.getusermedia",
+  "title": "Navigator Getusermedia",
+  "description": "Reasonable normalization for navigator.getUserMedia. Inspired by Mike Taylr's gUM Shield https://gist.github.com/f2ac64ed7fc467ccdfe3",
+  "version": "0.1.0",
+  "homepage": "https://github.com/rwldrn/navigator.getusermedia",
   "author": {
     "name": "Rick Waldron <waldron.rick@gmail.com>",
     "email": "waldron.rick@gmail.com"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/rwldrn/dmv"
+    "url": "git://github.com/rwldrn/navigator.getusermedia.git"
   },
   "bugs": {
-    "url": "https://github.com/rwldrn/dmv/issues"
+    "url": "https://github.com/rwldrn/navigator.getusermedia/issues"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/rwldrn/dmv/blob/master/LICENSE-MIT"
+      "url": "https://github.com/rwldrn/navigator.getusermedia/blob/master/LICENSE-MIT"
     }
   ],
   "dependencies": {},
-  "devDependencies": {
-    "grunt": "~0.1.0",
-    "express": "*",
-    "socket.io": "*",
-    "jade": ">= 0.0.1"
-  },
-  "keywords": [],
-  "engines": {
-    "node": ">= 0.6.9"
-  },
-  "main": "lib/dmv",
-  "scripts": {
-    "test": "grunt test"
-  }
+  "devDependencies": {},
+  "keywords": []
 }
