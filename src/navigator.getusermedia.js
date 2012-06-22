@@ -35,8 +35,6 @@
       return keys;
     };
 
-    console.log( options + "");
-
     getUserMedia.call( navigator, options, function( raw ) {
       var stream;
 
