@@ -23,14 +23,19 @@
   var getUserMedia = navigator.getUserMedia;
 
   navigator.getUserMedia = function( opts, callback, errback ) {
-    var options = opts;
+    var options, keys;
+
+    options = opts;
+    keys = Object.keys(opts).join(",");
 
     // Opera's implementation looks for a string, so give it one!
     options.toString = function() {
-      return "video,audio";
+      // { video: true } => "video"
+      // { video: true, audio: true } => "video,audio"
+      return keys;
     };
 
-    // console.log( options + "");
+    console.log( options + "");
 
     getUserMedia.call( navigator, options, function( raw ) {
       var stream;
