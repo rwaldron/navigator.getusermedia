@@ -1,4 +1,4 @@
-/*! Navigator Getusermedia - v0.1.0 - 3/9/2012
+/*! Navigator Getusermedia - v0.1.0 - 6/22/2012
 * https://github.com/rwldrn/navigator.getusermedia
 * Copyright (c) 2012 Rick Waldron <waldron.rick@gmail.com>; Licensed MIT */
 
@@ -21,38 +21,22 @@
     }
   }
 
-  var isSpecParam = true,
-      getUserMedia = navigator.getUserMedia;
-
-  // To test param style support, check that it's safe to call
-  // navigator.getUserMedia with an object param.
-  // Chrome's implementation will throw:
-  // NOT_SUPPORTED_ERR: DOM Exception 9
-  try {
-    navigator.getUserMedia({ video: true, audio: true }, function() {});
-  } catch(e) {
-    isSpecParam = false;
-  }
+  var getUserMedia = navigator.getUserMedia;
 
   navigator.getUserMedia = function( opts, callback, errback ) {
-    var key, options,
-        keys = Object.keys( opts ),
-        // Create guard against bogus options
-        safe = { video: 1, audio: 1 };
+    var options, keys;
 
-    if ( !isSpecParam ) {
-      // If this implementation expects a string param,
-      // translate the object param into a comma sep. string
-      // { video: 1, audio: 1 } => "video,audio"
-      options = keys.filter(function( key ) {
-        return this[ key ] && safe[ key ];
-      }, opts ).join(",");
-    } else {
-      options = {};
-      for ( key in opts ) {
-        options[ key ] = opts[ key ] && safe[ key ];
-      }
-    }
+    options = opts;
+    keys = Object.keys(opts).join(",");
+
+    // Opera's implementation looks for a string, so give it one!
+    options.toString = function() {
+      // { video: true } => "video"
+      // { video: true, audio: true } => "video,audio"
+      return keys;
+    };
+
+    console.log( options + "");
 
     getUserMedia.call( navigator, options, function( raw ) {
       var stream;
