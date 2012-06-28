@@ -1,4 +1,4 @@
-/*! Navigator Getusermedia - v0.1.0 - 6/22/2012
+/*! Navigator Getusermedia - v0.1.0 - 6/28/2012
 * https://github.com/rwldrn/navigator.getusermedia
 * Copyright (c) 2012 Rick Waldron <waldron.rick@gmail.com>; Licensed MIT */
 
