@@ -29,10 +29,12 @@ navigator.getUserMedia({ video: true, audio: true }, function( raw, cooked ) {
 </script>
 ```
 
-## Documentation
+## Supported By These Fine Browsers:
 
-- Opera (Labs Build: "Camera") uses the object parameter implementation, but pre-cooks the stream object
-- Chrome (Canary) uses the string parameter implementation, provides the raw stream object
+
+- Opera 12.02
+- Chrome (behind an about://flag)
+- Firefox Nightly 18+
 
 ## Contributing
 Style guide: [idiomatic.js](https://github.com/rwldrn/idiomatic.js), Lint and test your code using [grunt](https://github.com/cowboy/grunt).

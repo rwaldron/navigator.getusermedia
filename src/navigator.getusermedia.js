@@ -23,32 +23,28 @@
   var getUserMedia = navigator.getUserMedia;
 
   navigator.getUserMedia = function( opts, callback, errback ) {
-    // var options, keys;
-
-    // options = opts;
-    // keys = Object.keys(opts).join(",");
-
-    // // Opera's implementation looks for a string, so give it one!
-    // options.toString = function() {
-    //   // { video: true } => "video"
-    //   // { video: true, audio: true } => "video,audio"
-    //   return keys;
-    // };
 
     getUserMedia.call( navigator, opts, function( raw ) {
       var stream;
 
-      // If the stream is raw (ie. Canary), cook it.
+      // If the stream is raw (ie. Chrome), cook it.
       if ( raw.label && raw.readyState === 1 ) {
         stream = window.URL.createObjectURL( raw );
       }
+
+      // Opera 12.02 does it like this...
+      // Make Firefox Nightly happy...
+      if ( raw.createObjectURL || raw.currentTime !== undefined ) {
+        stream = raw;
+      }
+
 
       // This is non-standard, but feels like a
       // "nice to have" way to handle the mixed-matched
       // implementations of stream params.
       // This will be removed when the implementations
       // are updated.
-      callback( raw, /* non-standard */ stream );
+      callback( stream, /* non-standard */ raw );
     }, errback || function() {});
   };
 
