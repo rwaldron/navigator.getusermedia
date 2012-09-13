@@ -23,19 +23,19 @@
   var getUserMedia = navigator.getUserMedia;
 
   navigator.getUserMedia = function( opts, callback, errback ) {
-    var options, keys;
+    // var options, keys;
 
-    options = opts;
-    keys = Object.keys(opts).join(",");
+    // options = opts;
+    // keys = Object.keys(opts).join(",");
 
-    // Opera's implementation looks for a string, so give it one!
-    options.toString = function() {
-      // { video: true } => "video"
-      // { video: true, audio: true } => "video,audio"
-      return keys;
-    };
+    // // Opera's implementation looks for a string, so give it one!
+    // options.toString = function() {
+    //   // { video: true } => "video"
+    //   // { video: true, audio: true } => "video,audio"
+    //   return keys;
+    // };
 
-    getUserMedia.call( navigator, options, function( raw ) {
+    getUserMedia.call( navigator, opts, function( raw ) {
       var stream;
 
       // If the stream is raw (ie. Canary), cook it.

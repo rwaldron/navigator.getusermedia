@@ -1,4 +1,4 @@
-/*! Navigator Getusermedia - v0.1.0 - 6/28/2012
+/*! Navigator Getusermedia - v0.1.0 - 8/20/2012
 * https://github.com/rwldrn/navigator.getusermedia
 * Copyright (c) 2012 Rick Waldron <waldron.rick@gmail.com>; Licensed MIT */
 
@@ -24,19 +24,19 @@
   var getUserMedia = navigator.getUserMedia;
 
   navigator.getUserMedia = function( opts, callback, errback ) {
-    var options, keys;
+    // var options, keys;
 
-    options = opts;
-    keys = Object.keys(opts).join(",");
+    // options = opts;
+    // keys = Object.keys(opts).join(",");
 
-    // Opera's implementation looks for a string, so give it one!
-    options.toString = function() {
-      // { video: true } => "video"
-      // { video: true, audio: true } => "video,audio"
-      return keys;
-    };
+    // // Opera's implementation looks for a string, so give it one!
+    // options.toString = function() {
+    //   // { video: true } => "video"
+    //   // { video: true, audio: true } => "video,audio"
+    //   return keys;
+    // };
 
-    getUserMedia.call( navigator, options, function( raw ) {
+    getUserMedia.call( navigator, opts, function( raw ) {
       var stream;
 
       // If the stream is raw (ie. Canary), cook it.

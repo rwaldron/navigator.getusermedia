@@ -8,14 +8,14 @@
   });
 
   // Only run this in a real browser
-  if ( window.opera || window.chrome ) {
+  if ( window.opera || window.chrome || navigator.mozGetUserMedia ) {
     // This test is questionable, as it will prompt for sharing your camera
     asyncTest("Really works", 1, function() {
       var video = document.querySelector("#test-target");
 
       navigator.getUserMedia({ video: true }, function( raw, cooked ) {
-        video.src = cooked;
-
+        video.src = raw.currentTime !== undefined ? raw : cooked;
+        video.play();
         video.addEventListener("canplaythrough", function(e) {
           ok( true, "playing!!" );
           start();
