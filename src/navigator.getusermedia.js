@@ -22,7 +22,7 @@
 
   var getUserMedia = navigator.getUserMedia;
 
-  navigator.getUserMedia = function( opts, callback, errback ) {
+  navigator.getUserMedia = (getUserMedia) ? function( opts, callback, errback ) {
 
     getUserMedia.call( navigator, opts, function( raw ) {
       var stream;
@@ -46,6 +46,6 @@
       // are updated.
       callback( stream, /* non-standard */ raw );
     }, errback || function() {});
-  };
+  } : false;
 
 } (typeof window === "object" && window || this, this.navigator || {} ) );
