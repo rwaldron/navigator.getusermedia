@@ -1,8 +1,6 @@
-/*! Navigator Getusermedia - v0.1.0 - 9/13/2012
-* https://github.com/rwldrn/navigator.getusermedia
-* Copyright (c) 2012 Rick Waldron <waldron.rick@gmail.com>; Licensed MIT */
-
 (function( window, navigator ) {
+  var getUserMedia;
+
   // 2012-03-08 Inspired by https://gist.github.com/f2ac64ed7fc467ccdfe3
 
   // If unprefix.js is available, use it.
@@ -21,9 +19,9 @@
     }
   }
 
-  var getUserMedia = navigator.getUserMedia;
+  getUserMedia = navigator.getUserMedia;
 
-  navigator.getUserMedia = function( opts, callback, errback ) {
+  navigator.getUserMedia = getUserMedia ? function( opts, callback, errback ) {
 
     getUserMedia.call( navigator, opts, function( raw ) {
       var stream;
@@ -47,6 +45,6 @@
       // are updated.
       callback( stream, /* non-standard */ raw );
     }, errback || function() {});
-  };
+  } : undefined;
 
 } (typeof window === "object" && window || this, this.navigator || {} ) );
