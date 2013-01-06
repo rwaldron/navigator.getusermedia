@@ -5,7 +5,7 @@
 
   // Only run these tests if navigator.getUserMedia is supported
   if ( navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia ) {
-    
+
     // navigator.getUserMedia should be a function if supported
     test("navigator.getUserMedia is supported", 1, function() {
       equal(typeof navigator.getUserMedia, "function", "navigator.getUserMedia() is a function");
@@ -13,7 +13,7 @@
 
     // Do not run these tests in Phantom (real browser only)
     if ( !/Phantom/.test(navigator.userAgent) ) {
-    
+
       // This test is questionable, as it will prompt for sharing your camera
       asyncTest("Really works", 1, function() {
         var video = document.querySelector("#test-target");
