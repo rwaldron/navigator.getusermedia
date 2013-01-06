@@ -3,52 +3,51 @@
 /*global notDeepEqual:true, strictEqual:true, notStrictEqual:true, raises:true*/
 (function( window, navigator ) {
 
-  test("navigator.getUserMedia", 1, function() {
-    equal(typeof navigator.getUserMedia, "function", "navigator.getUserMedia() is a function");
-  });
+  // Only run these tests if navigator.getUserMedia is supported
+  if ( navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia ) {
 
-
-  // Only run this in a real browser
-  if ( window.opera || window.chrome || navigator.mozGetUserMedia ) {
-
-
-    // This test is questionable, as it will prompt for sharing your camera
-    asyncTest("Really works", 1, function() {
-      var video = document.querySelector("#test-target");
-
-
-      navigator.getUserMedia({ video: true }, function( stream ) {
-        video.src = stream;
-
-
-        video.play();
-        video.addEventListener("canplaythrough", function(e) {
-          ok( true, "playing!!" );
-          start();
-        }, false);
-      });
+    // navigator.getUserMedia should be a function if supported
+    test("navigator.getUserMedia is supported", 1, function() {
+      equal(typeof navigator.getUserMedia, "function", "navigator.getUserMedia() is a function");
     });
+
+    // Do not run these tests in Phantom (real browser only)
+    if ( !/Phantom/.test(navigator.userAgent) ) {
+
+      // This test is questionable, as it will prompt for sharing your camera
+      asyncTest("Really works", 1, function() {
+        var video = document.querySelector("#test-target");
+
+        // Firefox 17.0.1 fires "canplaythrough" event every few ms for some reason
+        var event = navigator.mozGetUserMedia ? "play" : "canplaythrough";
+
+        navigator.getUserMedia({ video: true }, function( stream ) {
+          
+          if ( navigator.mozGetUserMedia ) {
+            video.mozSrcObject = stream;  
+          } else {
+            video.src = stream;
+          }
+
+          video.play();
+          video.addEventListener(event, function(e) {
+            ok( true, "playing!!" );
+            start();
+          }, false);
+
+        });
+      });
+
+    }
+
+  // Only run these tests if navigator.getUserMedia is not supported
   } else {
 
-    // This test is questionable, as it will prompt for sharing your camera
-    asyncTest("first param is object, no exceptions", 1, function() {
-
-      // Needs to be tested in a real browser
-      if ( !/Phantom/.test(navigator.userAgent) ) {
-        try {
-          navigator.getUserMedia({ video: true, audio: true }, function() {}, function() {});
-
-          ok( true, "No Exception thrown" );
-        } catch(e) {
-          ok( false, "Exception thrown" );
-        } finally {
-          start();
-        }
-      } else {
-        ok( true, "not tested in phantomjs" );
-        start();
-      }
-
+    // navigator.getUserMedia should be equal to undefined if not supported
+    test("navigator.getUserMedia is not supported", 1, function() {
+      equal(navigator.getUserMedia, undefined, "navigator.getUserMedia() is undefined");
     });
+
   }
+
 } ( this, this.navigator ) );
