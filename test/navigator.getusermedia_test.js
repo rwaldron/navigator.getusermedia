@@ -17,7 +17,10 @@
       // This test is questionable, as it will prompt for sharing your camera
       asyncTest("Really works", 1, function() {
         var video = document.querySelector("#test-target");
-        
+
+        // Firefox 17.0.1 fires "canplaythrough" event every few ms for some reason
+        var event = navigator.mozGetUserMedia ? "play" : "canplaythrough";
+
         navigator.getUserMedia({ video: true }, function( stream ) {
           
           if ( navigator.mozGetUserMedia ) {
@@ -27,7 +30,7 @@
           }
 
           video.play();
-          video.addEventListener("canplaythrough", function(e) {
+          video.addEventListener(event, function(e) {
             ok( true, "playing!!" );
             start();
           }, false);
